@@ -99,41 +99,56 @@
   }
   .badge.peak .dot { background: var(--peak-ring); box-shadow: 0 0 0 4px color-mix(in srgb, var(--peak-ring) 25%, transparent); }
   .badge.off .dot { background: var(--off-ring); box-shadow: 0 0 0 4px color-mix(in srgb, var(--off-ring) 25%, transparent); }
-  .rate {
-    margin-top: clamp(12px, 1.5vw, 20px);
-    font-size: clamp(0.95rem, 0.85rem + 0.45vw, 1.35rem);
-    color: var(--muted);
-  }
-  .rate strong { color: var(--text); }
-  .clock {
-    margin-top: clamp(22px, 3vw, 44px);
-    font-family: var(--mono);
-    font-size: clamp(2rem, 1.5rem + 3.2vw, 4.75rem);
-    font-variant-numeric: tabular-nums;
-    letter-spacing: 0.02em;
-  }
-  .clock-label {
-    font-size: clamp(0.7rem, 0.65rem + 0.2vw, 0.95rem);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--muted);
-    margin-top: 2px;
-  }
+
+  /* Countdown is the hero element of the page */
   .countdown {
-    margin-top: clamp(18px, 2.5vw, 34px);
-    padding-top: clamp(16px, 2vw, 28px);
-    border-top: 1px solid var(--border);
+    margin-top: clamp(20px, 3vw, 36px);
   }
   .countdown-label {
-    font-size: clamp(0.8rem, 0.75rem + 0.25vw, 1.1rem);
+    font-size: clamp(0.9rem, 0.8rem + 0.4vw, 1.3rem);
     color: var(--muted);
+    font-weight: 500;
   }
   .countdown-value {
     font-family: var(--mono);
-    font-size: clamp(1.3rem, 1rem + 1.7vw, 2.6rem);
-    font-weight: 600;
-    margin-top: 4px;
+    font-size: clamp(3rem, 2rem + 6.5vw, 7rem);
+    font-weight: 700;
+    line-height: 1.05;
+    margin-top: clamp(4px, 0.6vw, 10px);
     font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+    transition: color 0.3s;
+  }
+  .countdown.peak .countdown-value { color: var(--peak-fg); }
+  .countdown.off .countdown-value { color: var(--off-fg); }
+  .rate {
+    margin-top: clamp(10px, 1.2vw, 16px);
+    font-size: clamp(0.9rem, 0.82rem + 0.35vw, 1.2rem);
+    color: var(--muted);
+  }
+  .rate strong { color: var(--text); }
+
+  /* Current UTC time: secondary, de-emphasized */
+  .now {
+    margin-top: clamp(24px, 3vw, 40px);
+    padding-top: clamp(16px, 2vw, 26px);
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 8px;
+    color: var(--muted);
+  }
+  .clock {
+    font-family: var(--mono);
+    font-size: clamp(0.95rem, 0.85rem + 0.3vw, 1.3rem);
+    font-variant-numeric: tabular-nums;
+    color: var(--text);
+  }
+  .clock-label {
+    font-size: clamp(0.7rem, 0.65rem + 0.2vw, 0.9rem);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
   }
   table {
     width: 100%;
@@ -182,14 +197,16 @@
         <span class="dot"></span>
         <span id="badge-text">Loading…</span>
       </span>
-      <div class="rate" id="rate-text"></div>
-
-      <div class="clock" id="clock">--:--:--</div>
-      <div class="clock-label">Current time (UTC)</div>
 
       <div class="countdown">
         <div class="countdown-label" id="countdown-label">Next change in</div>
         <div class="countdown-value" id="countdown">--:--:--</div>
+        <div class="rate" id="rate-text"></div>
+      </div>
+
+      <div class="now">
+        <span class="clock" id="clock">--:--:--</span>
+        <span class="clock-label">UTC now</span>
       </div>
 
       <table>
@@ -257,6 +274,7 @@
   const badgeText = document.getElementById("badge-text");
   const rateText = document.getElementById("rate-text");
   const clock = document.getElementById("clock");
+  const countdownWrap = document.querySelector(".countdown");
   const countdown = document.getElementById("countdown");
   const countdownLabel = document.getElementById("countdown-label");
 
@@ -266,6 +284,8 @@
 
     badge.classList.toggle("peak", peak);
     badge.classList.toggle("off", !peak);
+    countdownWrap.classList.toggle("peak", peak);
+    countdownWrap.classList.toggle("off", !peak);
     badgeText.textContent = peak ? "PEAK" : "OFF-PEAK";
     rateText.innerHTML = peak
       ? "Standard (peak) rates apply right now."
