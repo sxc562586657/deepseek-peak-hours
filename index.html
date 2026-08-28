@@ -50,41 +50,41 @@
   body {
     display: flex;
     justify-content: center;
-    padding: 32px 16px 64px;
+    padding: clamp(24px, 5vw, 72px) clamp(16px, 3vw, 32px) clamp(48px, 8vw, 100px);
   }
   .wrap {
     width: 100%;
-    max-width: 560px;
+    max-width: clamp(420px, 55vw, 1200px);
   }
   header {
     text-align: center;
-    margin-bottom: 24px;
+    margin-bottom: clamp(20px, 2.5vw, 40px);
   }
   header h1 {
-    font-size: 1.25rem;
+    font-size: clamp(1.25rem, 1rem + 1.2vw, 2.5rem);
     font-weight: 600;
     margin: 0 0 4px;
   }
   header p {
     margin: 0;
     color: var(--muted);
-    font-size: 0.9rem;
+    font-size: clamp(0.9rem, 0.8rem + 0.35vw, 1.2rem);
   }
   .card {
     background: var(--card-bg);
     border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 32px 28px;
+    border-radius: clamp(16px, 1.5vw, 28px);
+    padding: clamp(32px, 4.5vw, 72px) clamp(28px, 5.5vw, 80px);
     text-align: center;
     box-shadow: 0 1px 3px rgba(0,0,0,0.06);
   }
   .badge {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    padding: 10px 22px;
+    gap: clamp(8px, 1vw, 14px);
+    padding: clamp(10px, 1.2vw, 16px) clamp(22px, 2.5vw, 36px);
     border-radius: 999px;
-    font-size: 1.1rem;
+    font-size: clamp(1.1rem, 0.9rem + 0.9vw, 1.9rem);
     font-weight: 700;
     letter-spacing: 0.03em;
     transition: background 0.3s, color 0.3s;
@@ -92,45 +92,45 @@
   .badge.peak { background: var(--peak-bg); color: var(--peak-fg); }
   .badge.off { background: var(--off-bg); color: var(--off-fg); }
   .dot {
-    width: 10px;
-    height: 10px;
+    width: clamp(10px, 1vw, 16px);
+    height: clamp(10px, 1vw, 16px);
     border-radius: 50%;
     flex: none;
   }
   .badge.peak .dot { background: var(--peak-ring); box-shadow: 0 0 0 4px color-mix(in srgb, var(--peak-ring) 25%, transparent); }
   .badge.off .dot { background: var(--off-ring); box-shadow: 0 0 0 4px color-mix(in srgb, var(--off-ring) 25%, transparent); }
   .rate {
-    margin-top: 14px;
-    font-size: 0.95rem;
+    margin-top: clamp(12px, 1.5vw, 20px);
+    font-size: clamp(0.95rem, 0.85rem + 0.45vw, 1.35rem);
     color: var(--muted);
   }
   .rate strong { color: var(--text); }
   .clock {
-    margin-top: 26px;
+    margin-top: clamp(22px, 3vw, 44px);
     font-family: var(--mono);
-    font-size: 2rem;
+    font-size: clamp(2rem, 1.5rem + 3.2vw, 4.75rem);
     font-variant-numeric: tabular-nums;
     letter-spacing: 0.02em;
   }
   .clock-label {
-    font-size: 0.75rem;
+    font-size: clamp(0.7rem, 0.65rem + 0.2vw, 0.95rem);
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--muted);
     margin-top: 2px;
   }
   .countdown {
-    margin-top: 22px;
-    padding-top: 20px;
+    margin-top: clamp(18px, 2.5vw, 34px);
+    padding-top: clamp(16px, 2vw, 28px);
     border-top: 1px solid var(--border);
   }
   .countdown-label {
-    font-size: 0.85rem;
+    font-size: clamp(0.8rem, 0.75rem + 0.25vw, 1.1rem);
     color: var(--muted);
   }
   .countdown-value {
     font-family: var(--mono);
-    font-size: 1.4rem;
+    font-size: clamp(1.3rem, 1rem + 1.7vw, 2.6rem);
     font-weight: 600;
     margin-top: 4px;
     font-variant-numeric: tabular-nums;
@@ -138,27 +138,27 @@
   table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 24px;
-    font-size: 0.85rem;
+    margin-top: clamp(20px, 2.5vw, 32px);
+    font-size: clamp(0.85rem, 0.78rem + 0.25vw, 1.15rem);
   }
   caption {
     text-align: left;
-    font-size: 0.8rem;
+    font-size: clamp(0.8rem, 0.75rem + 0.2vw, 1.05rem);
     color: var(--muted);
     margin-bottom: 8px;
   }
   th, td {
     text-align: left;
-    padding: 8px 6px;
+    padding: clamp(8px, 0.7vw, 14px) clamp(6px, 0.5vw, 10px);
     border-bottom: 1px solid var(--border);
   }
   th { color: var(--muted); font-weight: 500; }
   td.hi { color: var(--peak-fg); font-weight: 600; }
   footer {
     text-align: center;
-    margin-top: 24px;
+    margin-top: clamp(20px, 2.5vw, 32px);
     color: var(--muted);
-    font-size: 0.78rem;
+    font-size: clamp(0.78rem, 0.73rem + 0.2vw, 1rem);
     line-height: 1.6;
   }
   footer a { color: var(--accent); }
